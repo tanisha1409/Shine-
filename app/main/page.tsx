@@ -3,6 +3,8 @@
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { Heart, Camera, Cake } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 type HeartProps = {
   id: number
@@ -16,9 +18,9 @@ type HeartProps = {
   xOffset: string
 }
 
-export default function RomanticBirthdayPage() {
+export default function MainPage() {
   const [hearts, setHearts] = useState<HeartProps[]>([])
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
 
@@ -207,6 +209,9 @@ export default function RomanticBirthdayPage() {
                   src={
                     samplePhotos[samplePhotos.length - 1] ||
                     "/placeholder.svg?height=112&width=112&query=circular%20portrait%20photo" ||
+                    "/placeholder.svg" ||
+                    "/placeholder.svg" ||
+                    "/placeholder.svg" ||
                     "/placeholder.svg"
                   }
                   alt="Beautiful memory"
@@ -363,6 +368,15 @@ export default function RomanticBirthdayPage() {
             </div>
           </div>
         </footer>
+
+        {/* Next Page Button */}
+        <div className="fixed bottom-4 right-4 z-50">
+          <Link href="/" prefetch={false}>
+            <Button variant="secondary" className="rounded-full">
+              Back to start
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Local styles for floating hearts and custom animations */}
