@@ -212,6 +212,7 @@ export default function MainPage() {
                     "/placeholder.svg" ||
                     "/placeholder.svg" ||
                     "/placeholder.svg" ||
+                    "/placeholder.svg" ||
                     "/placeholder.svg"
                   }
                   alt="Beautiful memory"
@@ -341,6 +342,17 @@ export default function MainPage() {
                 {'"Life is a collection of moments, and with you, every moment is magical" 💫'}
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Present Section */}
+        <section className="relative flex min-h-[100svh] items-center justify-center px-6 py-10">
+          <div className="max-w-2xl text-center space-y-6">
+            <h1 className="text-4xl md:text-5xl font-bold">🎁 Your Present</h1>
+            <p className="text-base md:text-lg text-white/90">
+              Surprise unlocked! Wishing you the happiest birthday filled with joy, laughter, and everything you love.
+            </p>
+            <p className="text-sm text-white/70">P.S. You can go back anytime using your browser’s back button.</p>
           </div>
         </section>
 

@@ -5,15 +5,15 @@ import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 
 export default function LandingPage() {
-  // Local background image shipped in /public (no remote config required)
+  // Full-bleed local background (no remote config required)
   const bgUrl = "/images/landing-bg.jpg"
 
-  // Music: robust autoplay with interaction fallback + visible controls
+  // Music controls and autoplay
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
 
-  // Replace with any song you like; kept to a stable, direct MP3 URL
+  // Replace this with your preferred MP3 if you like
   const songUrl =
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jhol%20_%20Coke%20Studio%20Pakistan%20_%20Season%2015%20_%20Maanu%20x%20Annural%20Khalid%20%5B-2RAq5o5pwc%5D-Rak1uBQpHTVgl4laE7Ertw6Rq0uL7H.mp3"
 
@@ -22,7 +22,6 @@ export default function LandingPage() {
     if (!audio) return
 
     const START_AT = 75 // seconds
-
     const seekWithinBounds = () => {
       const dur = audio.duration
       if (Number.isFinite(dur) && dur > 1) {
@@ -36,8 +35,7 @@ export default function LandingPage() {
         await audio.play()
         setIsPlaying(true)
       } catch {
-        // Autoplay might be blocked; wait for interaction or visibility change
-        setIsPlaying(false)
+        setIsPlaying(false) // wait for interaction
       }
     }
 
@@ -45,14 +43,12 @@ export default function LandingPage() {
       seekWithinBounds()
       void tryPlay()
     }
-
     const onInteract = () => {
       seekWithinBounds()
       void tryPlay()
       window.removeEventListener("pointerdown", onInteract)
       window.removeEventListener("keydown", onInteract)
     }
-
     const onVisibility = () => {
       if (document.visibilityState === "visible") {
         seekWithinBounds()
@@ -60,9 +56,7 @@ export default function LandingPage() {
       }
     }
 
-    // Initial attempt
     void tryPlay()
-
     audio.addEventListener("loadedmetadata", onLoaded)
     window.addEventListener("pointerdown", onInteract, { once: true })
     window.addEventListener("keydown", onInteract, { once: true })
@@ -107,7 +101,6 @@ export default function LandingPage() {
           className="absolute inset-0 bg-center bg-cover kenburns"
           style={{
             backgroundImage: `url('${bgUrl}')`,
-            // Make the image pop but keep text readable
             filter: "brightness(1.28) contrast(1.12) saturate(1.18)",
             transformOrigin: "center",
           }}

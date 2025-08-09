@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional: improve text wrapping for long lines on mobile */
+/* Improve text wrapping for long lines on mobile */
 .text-balance {
   text-wrap: balance;
 }
@@ -35,12 +35,11 @@
   }
 }
 
-/* Heading gradient shimmer (very subtle) */
+/* Heading gradient gentle shimmer */
 .shine {
   background-size: 200% 200%;
   animation: shineGradient 9s ease-in-out infinite;
 }
-
 @keyframes shineGradient {
   0% {
     background-position: 0% 50%;
@@ -53,37 +52,7 @@
   }
 }
 
-/* Slow bounce for small icons if needed */
-@keyframes bounceSlow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-.animate-bounce-slow {
-  animation: bounceSlow 2.2s ease-in-out infinite;
-}
-
-/* Slow pulse helper */
-@keyframes pulseSlow {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
-}
-.animate-pulse-slow {
-  animation: pulseSlow 2.4s ease-in-out infinite;
-}
-
-/* Make base body look crisp */
+/* Base document */
 html,
 body {
   height: 100%;
