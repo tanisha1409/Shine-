@@ -3,29 +3,22 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { landing } from "@/content/site-content"
 
 export default function LandingPage() {
-  // Full-bleed local background (no remote config required)
-  const bgUrl = "/images/landing-bg.jpg"
-
-  // Music controls and autoplay
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
 
-  // Replace this with your preferred MP3 if you like
-  const songUrl =
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jhol%20_%20Coke%20Studio%20Pakistan%20_%20Season%2015%20_%20Maanu%20x%20Annural%20Khalid%20%5B-2RAq5o5pwc%5D-Rak1uBQpHTVgl4laE7Ertw6Rq0uL7H.mp3"
-
+  // Robust autoplay with safe fallbacks
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
 
-    const START_AT = 75 // seconds
     const seekWithinBounds = () => {
       const dur = audio.duration
       if (Number.isFinite(dur) && dur > 1) {
-        audio.currentTime = Math.min(START_AT, Math.max(0, dur - 1))
+        audio.currentTime = Math.min(landing.songStartSeconds, Math.max(0, dur - 1))
       }
     }
 
@@ -100,7 +93,7 @@ export default function LandingPage() {
         <div
           className="absolute inset-0 bg-center bg-cover kenburns"
           style={{
-            backgroundImage: `url('${bgUrl}')`,
+            backgroundImage: `url('${landing.backgroundImage}')`,
             filter: "brightness(1.28) contrast(1.12) saturate(1.18)",
             transformOrigin: "center",
           }}
@@ -114,7 +107,7 @@ export default function LandingPage() {
       {/* Audio element + top-right controls */}
       <audio
         ref={audioRef}
-        src={songUrl}
+        src={landing.songUrl}
         autoPlay
         loop
         preload="metadata"
@@ -166,36 +159,26 @@ export default function LandingPage() {
                      drop-shadow-[0_4px_24px_rgba(255,255,255,0.12)] md:text-7xl"
           aria-label="Happy Birthday My Tanu"
         >
-          {"HAPPY"}
+          {landing.headingLines[0]}
           <br />
-          {"BIRTHDAY"}
+          {landing.headingLines[1]}
           <br />
-          {"MY TANU"} {"💜"}
+          {landing.headingLines[2]}
         </h1>
 
         <div className="mt-6 w-full max-w-3xl text-center space-y-5 text-white/90">
-          <p className="text-xl md:text-2xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] text-balance">
-            {"Another year older, wiser... and still looking suspiciously young. "}
-            {"🌺 "}
-            {"(Just kidding)"}
-          </p>
-          <p className="text-xl md:text-2xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] text-balance">
-            {"Thanks for being the kind of friend who’s always up for adventures, late-night talks. (For fun only)."}
-          </p>
-          <p className="text-xl md:text-2xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] text-balance">
-            {
-              "I hope this year brings you endless laughter, unexpected blessings, and cake so good you forget about the calories."
-            }
-          </p>
-          <p className="text-xl md:text-2xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] text-balance">
-            {"Stay awesome, stay weird, and never stop being you! "}
-            {"🥳💛🖤"}
-          </p>
-
+          {landing.paragraphs.map((p, i) => (
+            <p
+              key={i}
+              className="text-xl md:text-2xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] text-balance"
+            >
+              {p}
+            </p>
+          ))}
           <p className="text-sm md:text-base text-white/90">
-            {"Your love one colour "}
+            {landing.colorTag.label}{" "}
             <span className="align-middle rounded-md bg-black px-3 py-1 font-medium text-white shadow">
-              {"BLACK 🖤"}
+              {landing.colorTag.value}
             </span>
           </p>
         </div>
@@ -204,7 +187,12 @@ export default function LandingPage() {
       {/* Bottom fixed CTA */}
       <div className="pointer-events-none fixed inset-x-0 bottom-0 z-20 pb-[env(safe-area-inset-bottom)]">
         <div className="mx-auto mb-4 w-full max-w-md px-4">
-          <Link href="/main" className="pointer-events-auto block" prefetch={false} aria-label="Open your present">
+          <Link
+            href={landing.cta.href}
+            className="pointer-events-auto block"
+            prefetch={false}
+            aria-label="Open your present"
+          >
             <Button
               size="lg"
               className="w-full rounded-full px-8 py-6 text-base md:text-lg font-semibold
@@ -212,7 +200,7 @@ export default function LandingPage() {
                          shadow-rose-500/25 hover:from-pink-600 hover:to-rose-600 hover:shadow-rose-500/40
                          focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
             >
-              {"Your present 💐"}
+              {landing.cta.label}
             </Button>
           </Link>
         </div>

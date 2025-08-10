@@ -4,6 +4,7 @@ import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { Heart, Camera, Cake } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 type HeartProps = {
@@ -133,7 +134,7 @@ export default function MainPage() {
         >
           {isMuted ? (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
             </svg>
           ) : (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -209,6 +210,8 @@ export default function MainPage() {
                   src={
                     samplePhotos[samplePhotos.length - 1] ||
                     "/placeholder.svg?height=112&width=112&query=circular%20portrait%20photo" ||
+                    "/placeholder.svg" ||
+                    "/placeholder.svg" ||
                     "/placeholder.svg" ||
                     "/placeholder.svg" ||
                     "/placeholder.svg" ||
@@ -353,6 +356,89 @@ export default function MainPage() {
               Surprise unlocked! Wishing you the happiest birthday filled with joy, laughter, and everything you love.
             </p>
             <p className="text-sm text-white/70">P.S. You can go back anytime using your browser’s back button.</p>
+          </div>
+        </section>
+
+        {/* Present Page */}
+        <section className="relative min-h-[100svh] w-full overflow-hidden">
+          {/* Reuse the same background for continuity */}
+          <div className="absolute inset-0" aria-hidden="true">
+            <div
+              className="absolute inset-0 bg-center bg-cover kenburns"
+              style={{
+                backgroundImage: "url('/images/landing-bg.jpg')",
+                filter: "brightness(0.9) contrast(1.1) saturate(1.06)",
+                transformOrigin: "center",
+              }}
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+
+          <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-3xl flex-col items-center justify-center px-6 text-center">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-pink-200 to-rose-300">
+              For You, Tanu 💜
+            </h1>
+            <p className="mt-5 text-lg md:text-xl text-white/90 leading-relaxed">
+              Wishing you a day filled with love, joy, and all your favorite things. May this year be your best one yet!
+            </p>
+            <div className="mt-8 flex gap-3">
+              <Link href="/" prefetch={false}>
+                <Button variant="secondary" className="rounded-full px-6">
+                  Back home
+                </Button>
+              </Link>
+              <a
+                href="https://wa.me/?text=Thank%20you%20for%20the%20beautiful%20surprise%20%F0%9F%8C%9F"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex"
+              >
+                <Button className="rounded-full px-6 bg-pink-600 hover:bg-pink-700">Share the smile ✨</Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Gift Page */}
+        <section className="relative min-h-[100svh] w-full bg-gradient-to-b from-rose-50 to-pink-100">
+          <div className="mx-auto max-w-3xl px-4 py-10 sm:py-16">
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-rose-600">Your Present 💐</h1>
+              <p className="mt-3 text-lg text-rose-800/80">
+                A tiny bundle of joy, memories, and lots of love — just for you.
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-rose-200">
+              <div className="relative aspect-[16/9] w-full bg-rose-100">
+                <Image
+                  src="/images/tanu-portrait.jpg"
+                  alt="A lovely portrait to celebrate the day"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="p-6 sm:p-8 space-y-4">
+                <p className="text-rose-900 text-lg leading-relaxed">
+                  Here&apos;s to you — for the light you carry, the smiles you share, and the warmth you bring wherever
+                  you go. May your days be sprinkled with laughter, your nights with peace, and your heart with all the
+                  magic you deserve.
+                </p>
+                <p className="text-rose-900 text-lg leading-relaxed">
+                  Keep shining, keep dreaming, and never forget how loved you are. Happy Birthday! ✨
+                </p>
+                <div className="pt-2">
+                  <Link href="/" prefetch={false} aria-label="Back to the surprise">
+                    <Button className="bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:from-pink-600 hover:to-rose-600">
+                      Back to the surprise
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-8 text-center text-sm text-rose-900/70">With love, always. 🎂🎈</p>
           </div>
         </section>
 
